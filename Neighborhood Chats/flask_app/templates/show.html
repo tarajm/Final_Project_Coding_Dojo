@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Posted Chats</title>
+</head>
+{%extends "base.html" %}
+{%block title %}Home Page{%endblock%}
+{% block content %}
+<body>
+    <div class="p">
+    <h3><u>Welcome, {{ session['fname'] }} {{ session['lname']  }}!</u></h3>
+    {% if chat.users_id != session['users_id'] %}
+                    {% else %}
+                    <div class="show-header">
+                        <a class="btn" href="/edit/{{ chat.id }}">Edit Chat</a>
+                    | <a class="btn" href="/delete/{{ chat.id }}">Delete Chat</a> |
+                    </div>
+                    {% endif %}
+    </div>
+    <div id="view-chat" class="user_card col-4 mx-auto rounded">
+        <h2 class="header">Posted Chat</h2>
+        <p>Posted By: {{chat.posted_by}}</p>
+        <p>Posting Name: {{chat.name}}</p>
+        <p>Event Date: {{chat.date}}</p>
+        <p>Event Location: {{session.location}}</p>
+        <p>Event Description: {{chat.description}}</p>
+    </div> -->
+    <h3 class="text-center">Location</h3>
+    <div id="map">{{ chat.location }}</div>
+    <script>
+        L.mapquest.key = "{{ session.api_key }}";
+        var geocoder = L.mapquest.geocoding()
+        geocoder.geocode("{{ session.location }}");
+
+        L.mapquest.map('map', {
+        center: [37.7749, -122.4194],
+            layers: L.mapquest.tileLayer('map'),
+            zoom: 12
+    });
+    </script>
+</body>
+{% endblock %}
+</html>
+<!-- <script>
+    L.mapquest.key = 'h68b0nSkAKOnG5KZZlODWG4wxHKHBeoZ';
+    L.mapquest.map('map', {
+    center: [37.7749, -122.4194],
+    layers: L.mapquest.tileLayer('map'),
+    zoom: 12
+    });
+</script> -->
