@@ -1,0 +1,4 @@
+*.png
+
+venv/
+config.py
