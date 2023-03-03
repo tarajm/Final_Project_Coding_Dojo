@@ -68,13 +68,13 @@ class User:
         if not EMAIL_REGEX.match(user['email']):
             flash("Invalid Email Address!", "register")
             is_valid = False
-        if len(user['fname']) <= 3:
+        if len(user['fname']) < 3:
             flash("First name must be AT LEAST 3 characters!", "register")
             is_valid = False
-        if len(user['lname']) <= 3:
+        if len(user['lname']) < 3:
             flash("Last name must be AT LEAST 3 characters!", "register")
             is_valid = False
-        if len(user['password']) <= 8:
+        if len(user['password']) < 8:
             flash("Password must be AT LEAST 8 characters!", "register")
             is_valid = False
         if user['password'] != user['confirm_password']:
